@@ -1,190 +1,258 @@
-# জুলাই গণঅভ্যুত্থান ক্যালেন্ডার - July Uprising Calendar
+# জুলাই গণঅভ্যুত্থান - July Uprising Calendar
 
-## 📅 Project Overview
+A comprehensive digital archive documenting the historic July 2024 student movement in Bangladesh. This project preserves the memory of the 36-day uprising against discrimination through an interactive calendar, timeline, and photo gallery.
 
-A beautiful, animated calendar website commemorating the July 2024 student movement against discrimination in Bangladesh. This project serves as an interactive archive documenting the 36-day historical uprising.
+## 🇧🇩 Project Overview
+
+The July Uprising Calendar is a digital archive that chronicles the historic student movement that took place in July 2024. The project aims to:
+
+- Preserve the historical significance of the student uprising
+- Document the struggle against discrimination
+- Create educational content for future generations
+- Maintain a digital record of this important historical event
 
 ## ✨ Features
 
-### 🎨 Beautiful UI/UX
+### 📅 Interactive Calendar
 
-- **Smooth Animations**: CSS-based animations with staggered loading effects
-- **Responsive Design**: Works perfectly on desktop, tablet, and mobile devices
-- **Eye-catching Visuals**: Gradient backgrounds, hover effects, and particle animations
-- **Professional Layout**: Government demo project quality design
+- 36-day interactive calendar grid
+- Each day shows detailed events and descriptions
+- Hover effects with animated transitions
+- Background image slideshow for each day
+- Responsive design for all devices
 
-### 📱 Interactive Calendar Grid
+### 🖼️ Photo Gallery
 
-- **36 Day Cards**: Each representing a day of the July uprising
-- **Background Image Slideshow**: Automatic rotation of 6 different images with smooth transitions
-- **Hover Effects**: Multiple animation types (fade, slide, zoom, rotate, flip)
-- **Event Details**: Hover to see detailed information about each day's events
-- **Floating Particles**: Animated particles on hover for enhanced visual appeal
+- Historical photos and videos from the movement
+- Modal view with detailed descriptions
+- Related links to external sources
+- Categorized content for easy navigation
 
-### 🖼️ Image Management
+### ⏰ Timeline View
 
-- **6 Background Images**: Automatically rotating slideshow for each day card
-- **Multiple Transition Types**: Various animation styles for image transitions
-- **Staggered Timing**: Each card has slightly different timing for organic feel
+- Chronological timeline of events
+- Filterable by event categories
+- Interactive event cards with detailed information
+- Modal view for comprehensive details
 
-### 📄 Individual Day Pages
+### 🔍 Search Functionality
 
-- **Detailed Information**: Comprehensive details about each day's events
-- **Image Navigation**: Clickable dots to manually control image slideshow
-- **Progress Indicator**: Visual progress bar showing completion percentage
-- **Navigation**: Previous/Next day navigation buttons
-- **Bengali Content**: All content in Bengali language
+- Search by day number, title, or description
+- Real-time search results
+- Quick links to important events
+- Mobile-friendly search interface
 
-### 🎯 Key Features
+### 📱 Responsive Design
 
-- **Real Historical Data**: Based on actual July 2024 student movement events
-- **Government Demo Quality**: Professional design suitable for government presentation
-- **Accessibility**: Focus states, keyboard navigation, and screen reader friendly
-- **Performance Optimized**: Efficient animations and image loading
+- Mobile-first approach
+- Works on all screen sizes
+- Touch-friendly interactions
+- Optimized for mobile devices
 
-## 🚀 Technology Stack
+### 🎨 Beautiful Animations
 
-- **Framework**: Next.js 14 with App Router
-- **Styling**: Tailwind CSS with custom animations
+- Smooth fade-in animations
+- Hover effects and transitions
+- Floating particles and ripple effects
+- Background animations
+
+## 🛠️ Technology Stack
+
+- **Framework**: Next.js 15 (React)
 - **Language**: TypeScript
-- **Images**: JPEG format with automatic slideshow
-- **Animations**: Pure CSS animations and transitions
+- **Styling**: Tailwind CSS
+- **Animations**: Custom CSS animations
+- **Icons**: Lucide React
+- **Deployment**: Vercel-ready
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js 18+
+- npm or yarn
+
+### Installation
+
+1. Clone the repository:
+
+```bash
+git clone https://github.com/your-username/july-uprising-calendar.git
+cd july-uprising-calendar
+```
+
+2. Install dependencies:
+
+```bash
+npm install
+# or
+yarn install
+```
+
+3. Run the development server:
+
+```bash
+npm run dev
+# or
+yarn dev
+```
+
+4. Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+### Building for Production
+
+```bash
+npm run build
+npm start
+```
 
 ## 📁 Project Structure
 
 ```
 july-uprising-calendar/
-├── public/
-│   ├── july/           # Background images (1.jpeg to 6.jpeg)
-│   ├── sadalogo.png    # SADA organization logo
-│   └── WhatsApp Image 2025-07-10 at 17.47.56.jpeg  # Banner image
 ├── src/
 │   ├── app/
-│   │   ├── day/[day]/  # Individual day pages
-│   │   ├── globals.css # Global styles and animations
-│   │   ├── layout.tsx  # Root layout
-│   │   └── page.tsx    # Home page
-│   └── components/ui/
-│       ├── banner.tsx      # Banner component
-│       ├── calendar-grid.tsx # Main calendar grid
-│       └── logo.tsx        # Logo component
+│   │   ├── day/[day]/          # Individual day pages
+│   │   ├── gallery/            # Photo gallery
+│   │   ├── timeline/           # Timeline view
+│   │   ├── about/              # About page
+│   │   ├── globals.css         # Global styles
+│   │   ├── layout.tsx          # Root layout
+│   │   └── page.tsx            # Home page
+│   ├── components/
+│   │   └── ui/
+│   │       ├── banner.tsx      # Banner component
+│   │       ├── button.tsx      # Button component
+│   │       ├── calendar-grid.tsx # Calendar grid
+│   │       ├── logo.tsx        # Logo component
+│   │       ├── navigation.tsx  # Navigation bar
+│   │       └── search.tsx      # Search component
+│   └── lib/
+│       └── utils.ts            # Utility functions
+├── public/
+│   ├── july/                   # Historical images
+│   └── sadalogo.png           # Project logo
+├── package.json
 └── README.md
 ```
 
-## 🎨 Design Features
+## 🎯 Key Features Explained
 
-### Color Scheme
+### Calendar Grid
 
-- **Primary**: Red (#DC2626) - Represents the struggle and passion
-- **Secondary**: Yellow (#F59E0B) - Represents hope and victory
-- **Background**: Gradient from red to yellow
-- **Text**: White with drop shadows for readability
+The main calendar displays all 36 days in a responsive grid. Each day card features:
 
-### Animation Types
-
-1. **Fade In**: Smooth opacity transitions
-2. **Slide**: Horizontal sliding effects
-3. **Zoom**: Scale-based animations
-4. **Rotate**: Rotation effects
-5. **Flip**: 3D flip animations
-6. **Float**: Floating particle effects
-
-### Responsive Breakpoints
-
-- **Mobile**: < 768px
-- **Tablet**: 768px - 1024px
-- **Desktop**: > 1024px
-
-## 📖 Content Structure
-
-### Calendar Data
-
-Each day includes:
-
-- **Day Number**: 1-36
-- **Title**: Bengali title describing the day's theme
-- **Description**: Short description of the day's focus
-- **Event**: Specific event that occurred
-- **Details**: Comprehensive details about the day's events
-
-### Sample Day Entry
-
-```typescript
-{
-  day: 1,
-  title: "শুরুর দিন",
-  description: "আন্দোলনের সূচনা",
-  event: "শিক্ষার্থীদের প্রথম সমাবেশ",
-  details: "জুলাই মাসের প্রথম দিনে ঢাকা বিশ্ববিদ্যালয়ের শিক্ষার্থীরা প্রথমবারের মতো সমাবেশ করে বৈষম্যের বিরুদ্ধে প্রতিবাদ জানায়।"
-}
-```
-
-## 🎯 Usage
-
-### Home Page
-
-- View the complete 36-day calendar grid
-- Hover over any day card to see event details
-- Click on any day to view detailed information
+- Day number prominently displayed
+- Event title and description
+- Hover effects with additional details
+- Background image slideshow
+- Smooth animations and transitions
 
 ### Individual Day Pages
 
-- Navigate between days using Previous/Next buttons
-- View image slideshow with manual navigation
-- Read detailed information about each day's events
-- See progress indicator showing completion percentage
+Each day has its own detailed page showing:
+
+- Comprehensive event information
+- Image slideshow
+- Navigation to previous/next days
+- Progress indicator
+- Related content links
+
+### Timeline View
+
+The timeline provides a chronological view of events with:
+
+- Filterable categories
+- Interactive event cards
+- Detailed modal views
+- Visual timeline with connecting lines
+
+### Search Functionality
+
+Users can search through all days by:
+
+- Day number
+- Event title
+- Description text
+- Event details
+- Quick links to important events
+
+## 🎨 Design System
+
+### Colors
+
+- **Primary**: Red (#DC2626) and Yellow (#F59E0B)
+- **Background**: Gradient from red-900 to yellow-100
+- **Text**: White and gray variations
+- **Accents**: Various shades of red and yellow
+
+### Typography
+
+- **Headings**: Bold, large text with drop shadows
+- **Body**: Readable text with proper line height
+- **Bengali**: Proper support for Bengali text
+
+### Animations
+
+- **Fade In**: Smooth opacity transitions
+- **Hover Effects**: Scale and color changes
+- **Floating Elements**: Subtle background animations
+- **Ripple Effects**: Interactive feedback
+
+## 📱 Mobile Optimization
+
+The project is fully optimized for mobile devices:
+
+- Touch-friendly interactions
+- Responsive grid layouts
+- Mobile navigation menu
+- Optimized images and animations
+- Fast loading times
 
 ## 🔧 Customization
 
-### Adding New Images
+### Adding New Days
 
-1. Place new images in `public/july/` directory
-2. Update the `backgroundImages` array in `calendar-grid.tsx`
-3. Images will automatically be included in the slideshow
+To add new days, update the `calendarData` array in the relevant components:
 
-### Modifying Animations
+- `src/components/ui/calendar-grid.tsx`
+- `src/app/day/[day]/page.tsx`
+- `src/app/timeline/page.tsx`
 
-1. Edit CSS animations in `src/app/globals.css`
-2. Adjust timing and easing functions
-3. Add new animation types as needed
+### Styling Changes
 
-### Updating Content
+Modify the Tailwind classes in the components or update the global CSS in `src/app/globals.css`.
 
-1. Modify the `calendarData` array in `calendar-grid.tsx`
-2. Update individual day details in `src/app/day/[day]/page.tsx`
-3. All content is in Bengali language
+### Content Updates
 
-## 🌟 Special Features
+Update the Bengali text content directly in the component files.
 
-### Government Demo Quality
+## 🌐 Deployment
 
-- Professional design suitable for government presentations
-- High-quality animations and transitions
-- Comprehensive documentation
-- Accessibility considerations
+The project is ready for deployment on Vercel:
 
-### Performance Optimizations
+1. Push your code to GitHub
+2. Connect your repository to Vercel
+3. Deploy automatically
 
-- Efficient CSS animations
-- Optimized image loading
-- Responsive design for all devices
-- Minimal JavaScript usage
+Or deploy to other platforms:
 
-### Accessibility
+- Netlify
+- Railway
+- DigitalOcean App Platform
 
-- Keyboard navigation support
-- Screen reader friendly
-- High contrast design
-- Focus states for all interactive elements
+## 📄 License
 
-## 📝 License
-
-This project is created for the Bangladesh government demo project showcasing the July 2024 student movement against discrimination archive.
+This project is created for educational and historical preservation purposes.
 
 ## 🤝 Contributing
 
-This is a demo project for the Bangladesh government. For any modifications or enhancements, please ensure they maintain the professional quality and historical accuracy of the content.
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## 📞 Contact
+
+For questions or support, please contact the project maintainers.
 
 ---
 
-**জুলাই গণঅভ্যুত্থান ক্যালেন্ডার** - Remembering the historic student movement against discrimination in July 2024.
+**Note**: This project documents historical events and is intended for educational and archival purposes. The content reflects the historical significance of the July 2024 student movement in Bangladesh.

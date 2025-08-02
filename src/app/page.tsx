@@ -1,6 +1,7 @@
 import Logo from "@/components/ui/logo";
 import CalendarGrid from "@/components/ui/calendar-grid";
 import Banner from "@/components/ui/banner";
+import Search from "@/components/ui/search";
 
 export default function Home() {
   return (
@@ -16,6 +17,9 @@ export default function Home() {
         <div className="hidden md:block absolute top-1/3 left-1/6 w-8 h-8 bg-yellow-400/5 rounded-full animate-pulse" style={{ animationDelay: '1.5s' }}></div>
         <div className="hidden md:block absolute top-2/3 right-1/6 w-6 h-6 bg-red-400/5 rounded-full animate-pulse" style={{ animationDelay: '2.5s' }}></div>
       </div>
+
+      {/* Search Component */}
+      <Search />
 
       <div className="relative z-10 w-full max-w-7xl mx-auto flex flex-col items-center gap-4 sm:gap-6 md:gap-8 px-2 sm:px-4 md:px-8 py-4 sm:py-6 md:py-8">
         {/* Header Section */}
