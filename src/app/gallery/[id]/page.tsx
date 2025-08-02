@@ -1,8 +1,10 @@
 "use client";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { useParams } from "next/navigation";
 
-// Gallery data with real events from July 2024 student movement
+// Gallery data (same as in gallery page)
 const galleryData = [
     {
         id: 1,
@@ -83,7 +85,39 @@ const galleryData = [
     }
 ];
 
-export default function GalleryPage() {
+export default function GalleryDetailPage() {
+    const params = useParams();
+    const [item, setItem] = useState<typeof galleryData[0] | null>(null);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const id = parseInt(params.id as string);
+        const foundItem = galleryData.find(item => item.id === id);
+        setItem(foundItem || null);
+        setLoading(false);
+    }, [params.id]);
+
+    if (loading) {
+        return (
+            <main className="min-h-screen bg-gradient-to-br from-red-900 via-red-800 to-yellow-100 flex items-center justify-center">
+                <div className="text-white text-xl">লোড হচ্ছে...</div>
+            </main>
+        );
+    }
+
+    if (!item) {
+        return (
+            <main className="min-h-screen bg-gradient-to-br from-red-900 via-red-800 to-yellow-100 flex items-center justify-center">
+                <div className="text-center text-white">
+                    <h1 className="text-2xl font-bold mb-4">কন্টেন্ট খুঁজে পাওয়া যায়নি</h1>
+                    <Link href="/gallery" className="bg-white/20 px-6 py-3 rounded-lg hover:bg-white/30 transition-colors">
+                        গ্যালারিতে ফিরে যান
+                    </Link>
+                </div>
+            </main>
+        );
+    }
+
     return (
         <main className="min-h-screen bg-gradient-to-br from-red-900 via-red-800 to-yellow-100 relative overflow-hidden">
             {/* Animated Background */}
@@ -94,104 +128,115 @@ export default function GalleryPage() {
                 <div className="absolute bottom-20 right-1/3 w-10 h-10 sm:w-14 sm:h-14 md:w-20 md:h-20 bg-red-300/10 rounded-full animate-pulse" style={{ animationDelay: '0.5s' }}></div>
             </div>
 
-            <div className="relative z-10 min-h-screen flex flex-col items-center p-2 sm:p-4 md:p-8">
-                {/* Header */}
-                <div className="text-center space-y-2 sm:space-y-4 mb-6 sm:mb-8 animate-fadeIn">
+            <div className="relative z-10 min-h-screen p-4 sm:p-6 md:p-8">
+                {/* Navigation */}
+                <div className="mb-6 sm:mb-8">
                     <Link
-                        href="/"
-                        className="inline-block px-4 sm:px-6 py-2 sm:py-3 bg-gradient-to-r from-red-600 to-yellow-500 text-white rounded-lg hover:from-red-700 hover:to-yellow-600 transition-all duration-300 font-semibold shadow-lg transform hover:scale-105 text-sm sm:text-base mb-4"
+                        href="/gallery"
+                        className="inline-flex items-center px-4 sm:px-6 py-2 sm:py-3 bg-gradient-to-r from-red-600 to-yellow-500 text-white rounded-lg hover:from-red-700 hover:to-yellow-600 transition-all duration-300 font-semibold shadow-lg transform hover:scale-105 text-sm sm:text-base"
                     >
-                        ← ফিরে যান
+                        ← গ্যালারিতে ফিরে যান
                     </Link>
-
-                    <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-white drop-shadow-2xl leading-tight" style={{ fontFamily: 'serif', textShadow: '3px 3px 6px rgba(0,0,0,0.7)' }}>
-                        জুলাই গণঅভ্যুত্থান গ্যালারি
-                    </h1>
-                    <p className="text-white/90 text-sm sm:text-base md:text-lg max-w-2xl mx-auto leading-relaxed" style={{ fontFamily: 'serif' }}>
-                        ঐতিহাসিক জুলাই ২০২৪ ছাত্র আন্দোলনের গুরুত্বপূর্ণ মুহূর্তগুলি
-                    </p>
                 </div>
 
-                {/* Calligraphy-style Gallery Grid */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8 w-full max-w-7xl">
-                    {galleryData.map((item, index) => (
-                        <Link
-                            key={item.id}
-                            href={`/gallery/${item.id}`}
-                            className="group block"
-                        >
-                            <div
-                                className="bg-white/95 backdrop-blur-sm rounded-xl sm:rounded-2xl shadow-2xl overflow-hidden transform hover:scale-105 hover:rotate-1 transition-all duration-700 cursor-pointer animate-fadeIn border-2 border-transparent hover:border-yellow-400/50"
-                                style={{
-                                    animationDelay: `${index * 0.15}s`,
-                                    boxShadow: '0 20px 40px rgba(0,0,0,0.1), 0 8px 20px rgba(0,0,0,0.08)'
-                                }}
-                            >
-                                <div className="relative h-48 sm:h-56 md:h-64 overflow-hidden">
-                                    <Image
-                                        src={item.image}
-                                        alt={item.title}
-                                        fill
-                                        className="object-cover transition-transform duration-700 group-hover:scale-110"
-                                    />
-                                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                {/* Main Content */}
+                <div className="max-w-6xl mx-auto">
+                    {/* Hero Image Section */}
+                    <div className="relative mb-8 sm:mb-12 animate-fadeIn">
+                        <div className="relative h-64 sm:h-96 md:h-[500px] rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl">
+                            <Image
+                                src={item.image}
+                                alt={item.title}
+                                fill
+                                className="object-cover"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
 
-                                    {/* Calligraphy-style overlay */}
-                                    <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-black/40 backdrop-blur-sm flex items-center justify-center">
-                                        <div className="text-center text-white transform -translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
-                                            <div className="w-16 h-16 mx-auto mb-3 bg-white/20 rounded-full flex items-center justify-center border-2 border-white/50">
-                                                <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
-                                                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clipRule="evenodd" />
-                                                </svg>
-                                            </div>
-                                            <p className="text-sm font-semibold" style={{ fontFamily: 'serif' }}>বিস্তারিত দেখুন</p>
-                                        </div>
-                                    </div>
-
-                                    <div className="absolute bottom-2 left-2 right-2">
-                                        <div className="text-white text-xs sm:text-sm font-semibold bg-black/60 backdrop-blur-sm rounded-lg px-3 py-2 border border-white/20" style={{ fontFamily: 'serif' }}>
-                                            {item.date}
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="p-4 sm:p-5 md:p-6 bg-gradient-to-br from-white to-gray-50">
-                                    <h3 className="text-sm sm:text-base md:text-lg font-bold text-gray-800 mb-3 line-clamp-2 group-hover:text-red-700 transition-colors duration-300" style={{ fontFamily: 'serif', lineHeight: '1.4' }}>
+                            {/* Calligraphy-style title overlay */}
+                            <div className="absolute bottom-6 sm:bottom-8 md:bottom-12 left-6 sm:left-8 md:left-12 right-6 sm:right-8 md:right-12">
+                                <div className="bg-black/40 backdrop-blur-md rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8 border border-white/20">
+                                    <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-2 sm:mb-4 leading-tight" style={{ fontFamily: 'serif', textShadow: '2px 2px 4px rgba(0,0,0,0.5)' }}>
                                         {item.title}
-                                    </h3>
-                                    <p className="text-xs sm:text-sm text-gray-600 line-clamp-3 leading-relaxed" style={{ fontFamily: 'serif', lineHeight: '1.6' }}>
-                                        {item.description}
-                                    </p>
-                                    <div className="mt-4 flex items-center justify-between">
-                                        <div className="flex items-center space-x-2">
-                                            <div className="w-1 h-6 bg-gradient-to-b from-red-600 to-yellow-500 rounded-full"></div>
-                                            <span className="text-xs text-gray-500" style={{ fontFamily: 'serif' }}>
-                                                ঐতিহাসিক ঘটনা
-                                            </span>
-                                        </div>
-                                        <div className="text-red-600 group-hover:text-red-700 transition-colors duration-300">
-                                            <svg className="w-5 h-5 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                                            </svg>
-                                        </div>
+                                    </h1>
+                                    <div className="flex items-center space-x-4 text-white/90">
+                                        <span className="bg-red-600/80 px-3 py-1 rounded-full text-sm font-medium">
+                                            {item.date}
+                                        </span>
                                     </div>
                                 </div>
                             </div>
-                        </Link>
-                    ))}
-                </div>
+                        </div>
+                    </div>
 
-                {/* Decorative Elements */}
-                <div className="mt-12 sm:mt-16 md:mt-20 text-center">
-                    <div className="inline-flex items-center space-x-4 bg-white/10 backdrop-blur-sm rounded-full px-6 py-3 border border-white/20">
-                        <div className="w-3 h-3 bg-red-500 rounded-full animate-pulse"></div>
-                        <p className="text-white/80 text-sm" style={{ fontFamily: 'serif' }}>
-                            স্মৃতিতে রেখে দেওয়া ইতিহাস
-                        </p>
-                        <div className="w-3 h-3 bg-yellow-500 rounded-full animate-pulse" style={{ animationDelay: '0.5s' }}></div>
+                    {/* Content Sections */}
+                    <div className="grid lg:grid-cols-3 gap-6 sm:gap-8 md:gap-12">
+                        {/* Main Description */}
+                        <div className="lg:col-span-2 space-y-6 sm:space-y-8">
+                            {/* Description Card */}
+                            <div className="bg-white/95 backdrop-blur-sm rounded-xl sm:rounded-2xl shadow-2xl p-6 sm:p-8 md:p-10 animate-fadeIn" style={{ animationDelay: '0.2s' }}>
+                                <div className="border-l-4 border-red-600 pl-4 sm:pl-6 mb-6">
+                                    <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-gray-800 mb-3" style={{ fontFamily: 'serif' }}>
+                                        সংক্ষিপ্ত বিবরণ
+                                    </h2>
+                                    <p className="text-sm sm:text-base md:text-lg text-gray-700 leading-relaxed" style={{ fontFamily: 'serif', lineHeight: '1.8' }}>
+                                        {item.description}
+                                    </p>
+                                </div>
+                            </div>
+
+                            {/* Detailed Description */}
+                            <div className="bg-gradient-to-br from-red-50 to-yellow-50 rounded-xl sm:rounded-2xl shadow-2xl p-6 sm:p-8 md:p-10 border border-red-200/50 animate-fadeIn" style={{ animationDelay: '0.4s' }}>
+                                <div className="border-l-4 border-yellow-600 pl-4 sm:pl-6">
+                                    <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-gray-800 mb-4" style={{ fontFamily: 'serif' }}>
+                                        বিস্তারিত বিবরণ
+                                    </h2>
+                                    <div className="prose prose-lg max-w-none">
+                                        <p className="text-sm sm:text-base md:text-lg text-gray-800 leading-relaxed" style={{ fontFamily: 'serif', lineHeight: '1.8' }}>
+                                            {item.details}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Sidebar */}
+                        <div className="space-y-6 sm:space-y-8">
+                            {/* Links Section */}
+                            <div className="bg-white/95 backdrop-blur-sm rounded-xl sm:rounded-2xl shadow-2xl p-6 sm:p-8 animate-fadeIn" style={{ animationDelay: '0.6s' }}>
+                                <h3 className="text-lg sm:text-xl font-bold text-gray-800 mb-4 sm:mb-6" style={{ fontFamily: 'serif' }}>
+                                    সম্পর্কিত লিংকসমূহ
+                                </h3>
+                                <div className="space-y-3 sm:space-y-4">
+                                    {item.links.map((link, index) => (
+                                        <a
+                                            key={index}
+                                            href={link.url}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="block w-full px-4 sm:px-6 py-3 sm:py-4 bg-gradient-to-r from-red-600 to-yellow-500 text-white font-semibold rounded-lg hover:from-red-700 hover:to-yellow-600 transition-all duration-300 text-center transform hover:scale-105 shadow-lg text-sm sm:text-base"
+                                            style={{ fontFamily: 'serif' }}
+                                        >
+                                            {link.title}
+                                        </a>
+                                    ))}
+                                </div>
+                            </div>
+
+                            {/* Date Info */}
+                            <div className="bg-gradient-to-br from-yellow-50 to-red-50 rounded-xl sm:rounded-2xl shadow-2xl p-6 sm:p-8 border border-yellow-200/50 animate-fadeIn" style={{ animationDelay: '0.8s' }}>
+                                <h3 className="text-lg sm:text-xl font-bold text-gray-800 mb-3" style={{ fontFamily: 'serif' }}>
+                                    তারিখ ও সময়
+                                </h3>
+                                <div className="bg-white/80 rounded-lg px-4 py-3 text-center">
+                                    <p className="text-base sm:text-lg font-bold text-red-800" style={{ fontFamily: 'serif' }}>
+                                        {item.date}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </main>
     );
-} 
+}
